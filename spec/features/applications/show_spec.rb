@@ -38,4 +38,19 @@ RSpec.describe "the applications show page" do
     click_link(@pet2.name)
     expect(current_path).to eq "/pets/#{@pet2.id}"
   end
+
+  # User Story 4
+  it "can search for pets to add to the application" do 
+    visit "/applications/#{@app1.id}"
+
+    expect(page).to_not have_content("Blue")
+    expect(page).to have_content("Add a Pet to This Application")
+
+    fill_in "search_bar", with: "Blue"
+    click_button "Submit"
+
+    expect(current_path).to eq "/applications/#{@app1.id}"
+
+    expect(page).to have_content("Blue")
+  end
 end
