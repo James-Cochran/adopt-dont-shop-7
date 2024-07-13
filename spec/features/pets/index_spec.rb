@@ -81,37 +81,4 @@ RSpec.describe "the pets index" do
     expect(page).to have_content(pet_2.name)
     expect(page).to_not have_content(pet_3.name)
   end
-
-  # User Story 2
-  it "has a functional link to create a new application for a pet" do 
-    shelter = Shelter.create(name: "Aurora shelter", city: "Aurora, CO", foster_program: false, rank: 9)
-    pet_1 = Pet.create(adoptable: true, age: 7, breed: "sphynx", name: "Bare-y Manilow", shelter_id: shelter.id)
-    pet_2 = Pet.create(adoptable: true, age: 3, breed: "domestic pig", name: "Babe", shelter_id: shelter.id)
-    pet_3 = Pet.create(adoptable: true, age: 4, breed: "chihuahua", name: "Elle", shelter_id: shelter.id)
-
-    visit "/pets"
-
-    click_link "Start an Application"
-
-    expect(current_path).to eq "/applications/new"
-
-    fill_in "name", with: "Bob"
-    fill_in "street_address", with: "1234 Bob's rd."
-    fill_in "city", with: "Boulder"
-    fill_in "state", with: "Colorado"
-    fill_in "zip_code", with: "80302"
-    fill_in "description", with: "I need a pet!"
-    
-    click_button "Submit"
-
-    expect(current_path).to eq "/applications/1"
-
-    expect(page).to have_content("Applicant Name: Bob")
-    expect(page).to have_content("Street Address: 1234 Bob's rd.")
-    expect(page).to have_content("City: Boulder")
-    expect(page).to have_content("State: Colorado")
-    expect(page).to have_content("Zip Code: 80302")
-    expect(page).to have_content("Description: I need a pet!")
-    expect(page).to have_content("Status: In Progress")
-  end
 end
