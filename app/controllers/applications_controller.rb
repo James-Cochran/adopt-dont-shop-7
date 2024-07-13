@@ -8,9 +8,14 @@ class ApplicationsController < ApplicationController
   end
 
   def create
-    @application = Application.create(application_params)
-    @application.update({"status" => "In Progress"})
-    redirect_to "/applications/#{@application.id}"
+    @application = Application.new(application_params)
+    if @application.save
+      @application.update({"status" => "In Progress"})
+      redirect_to "/applications/#{@application.id}"
+    else
+      redirect_to "/applications/new"
+      flash[:error] = "You must fill in all fields to submit"
+    end
   end
   
   private
