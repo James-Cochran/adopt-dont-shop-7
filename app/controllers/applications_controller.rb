@@ -7,4 +7,14 @@ class ApplicationsController < ApplicationController
     @application = Application.new 
   end
 
+  def create
+    @application = Application.create(application_params)
+    @application.update({"status" => "In Progress"})
+    redirect_to "/applications/#{@application.id}"
+  end
+  
+  private
+  def application_params
+    params.permit(:name, :street_address, :city, :state, :zip_code, :description)
+  end
 end
