@@ -46,8 +46,8 @@ RSpec.describe "the applications show page" do
     expect(page).to_not have_content("Blue")
     expect(page).to have_content("Add a Pet to This Application")
 
-    fill_in "search_bar", with: "Blue"
-    click_button "Submit"
+    fill_in "search_by_name", with: "Blue"
+    click_button "submit"
 
     expect(current_path).to eq "/applications/#{@app1.id}"
 

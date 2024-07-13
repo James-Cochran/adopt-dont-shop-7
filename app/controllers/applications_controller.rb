@@ -17,6 +17,10 @@ class ApplicationsController < ApplicationController
       flash[:error] = "You must fill in all fields to submit"
     end
   end
+
+  def search
+
+  end
   
   private
   def application_params
