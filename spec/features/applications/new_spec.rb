@@ -7,7 +7,7 @@ RSpec.describe "the new applications form" do
 
     fill_in "name", with: "Bob"
     
-    click_button "Submit"
+    click_button "Save"
 
     expect(current_path).to eq "/applications/new"
 
@@ -20,9 +20,9 @@ RSpec.describe "the new applications form" do
     fill_in "zip_code", with: "80302"
     fill_in "description", with: "I need a pet!"
 
-    click_button "Submit"
-
-    expect(current_path).to eq "/applications/1"
+    click_button "Save"
+    application_id = Application.last.id
+    expect(current_path).to eq "/applications/#{application_id}"
 
     expect(page).to have_content("Applicant Name: Bob")
     expect(page).to have_content("Street Address: 1234 Bob's rd.")
