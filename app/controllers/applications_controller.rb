@@ -1,6 +1,7 @@
 class ApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
+    @pets = Pet.search(params[:search_by_name]) if params[:search_by_name].present?
   end
 
   def new
@@ -17,6 +18,7 @@ class ApplicationsController < ApplicationController
       flash[:error] = "You must fill in all fields to submit"
     end
   end
+
   
   private
   def application_params
