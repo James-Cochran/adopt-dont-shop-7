@@ -48,9 +48,9 @@ RSpec.describe "the applications show page" do
 
     fill_in "search_by_name", with: "Blue"
     click_button "submit"
-
+ 
     expect(current_path).to eq "/applications/#{@app1.id}"
-
+    
     expect(page).to have_content("Blue")
   end
 end

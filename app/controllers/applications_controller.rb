@@ -19,7 +19,9 @@ class ApplicationsController < ApplicationController
   end
 
   def search
-
+    @application = Application.find(params[:application_id])
+    @pets = Pet.search(params[:search_by_name]).adoptable
+    binding.pry
   end
   
   private
