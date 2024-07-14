@@ -43,32 +43,53 @@ RSpec.describe "the applications show page" do
   it "can search for pets to add to the application" do 
     visit "/applications/#{@app1.id}"
 
-    expect(page).to_not have_content("Blue")
-    expect(page).to have_content("Add a Pet to This Application")
+    within("#pets_on_application") do 
+      expect(page).to have_content("Scooby")
+      expect(page).to have_content("Scrappy")
+      expect(page).to_not have_content("Blue")
+    end
 
-    fill_in "search_by_name", with: "Blue"
-    click_button "submit"
- 
+    within("#add_pets") do 
+      expect(page).to have_content("Add a Pet to This Application")
+      fill_in "search_by_name", with: "Blue"
+      click_button "Submit"
+    end
+
     expect(current_path).to eq "/applications/#{@app1.id}"
     
-    expect(page).to have_content("Blue")
+    within("#search_results") do 
+      expect(page).to have_content("Blue")
+    end
   end
 
   # User Story 5
   it "adds a pet to an application" do
     visit "/applications/#{@app1.id}"
 
-    fill_in "search_by_name", with: "Blue"
-    click_button "submit"
+    within("#pets_on_application") do 
+      expect(page).to have_content("Scooby")
+      expect(page).to have_content("Scrappy")
+      expect(page).to_not have_content("Blue")
+    end
+
+    within("#add_pets") do 
+      fill_in "search_by_name", with: "Blue"
+      click_button "Submit"
+    end
 
     expect(current_path).to eq "/applications/#{@app1.id}"
-    expect(page).to have_content("Blue")
 
-    click_button "Adopt this Pet"
+    within("#search_results") do 
+      expect(page).to have_content("Blue")
+      click_button "Adopt This Pet"
+    end
 
     expect(current_path).to eq "/applications/#{@app1.id}"
-    expect(page).to have_content("Blue")
-    expect(page).to have_content("Adopt this Pet")
+
+    within("#pets_on_application") do 
+      expect(page).to have_content("Scooby")
+      expect(page).to have_content("Scrappy")
+      expect(page).to have_content("Blue")
+    end
   end
-
 end
