@@ -53,4 +53,22 @@ RSpec.describe "the applications show page" do
     
     expect(page).to have_content("Blue")
   end
+
+  # User Story 5
+  it "adds a pet to an application" do
+    visit "/applications/#{@app1.id}"
+
+    fill_in "search_by_name", with: "Blue"
+    click_button "submit"
+
+    expect(current_path).to eq "/applications/#{@app1.id}"
+    expect(page).to have_content("Blue")
+
+    click_button "Adopt this Pet"
+
+    expect(current_path).to eq "/applications/#{@app1.id}"
+    expect(page).to have_content("Blue")
+    expect(page).to have_content("Adopt this Pet")
+  end
+
 end
