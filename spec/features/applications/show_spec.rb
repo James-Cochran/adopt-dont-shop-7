@@ -160,5 +160,23 @@ RSpec.describe "the applications show page" do
       expect(page).to_not have_content("Blue")
     end
   end
+
+  # User Story 9
+  it " shows pet name matches without being case sensitive" do
+    visit "/applications/#{@app1.id}"
+
+    within("#add_pets") do 
+      fill_in "search_by_name", with: "bL"
+      click_button "Submit"
+    end
+
+    expect(current_path).to eq "/applications/#{@app1.id}"
+
+    within("#search_results") do
+    expect(page).to have_content("Blue")
+    expect(page).to_not have_content("Scooby")
+    expect(page).to_not have_content("Scrappy")
+  end
+end
     
 end
