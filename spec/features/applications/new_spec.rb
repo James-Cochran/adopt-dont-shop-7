@@ -9,8 +9,6 @@ RSpec.describe "the new applications form" do
     
     click_button "Save"
 
-    expect(current_path).to eq "/applications/new"
-
     expect(page).to have_content("You must fill in all fields to submit")
 
     fill_in "name", with: "Bob"
