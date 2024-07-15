@@ -26,13 +26,8 @@ class ApplicationsController < ApplicationController
 
   def update
     @application = Application.find(params[:id])
-    # binding.pry
-    if @application.why_good_owner != nil
-      @application.update({"status" => "Pending"})
-    elsif
-      @application.update(application_params)
-      redirect_to "/applications/#{@application.id}"
-    end
+    @application.update({"status" => "Pending"})
+    redirect_to "/applications/#{@application.id}"
   end
 
   def adopt_pet

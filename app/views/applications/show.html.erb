@@ -1,5 +1,5 @@
 <h1>Applicant Name: <%= @application.name %></h1>
-<h3>Street Address: <%= @application.street_address %> </h3>
+<h3>Street Address: <%= @application.street_address %></h3>
 <h3>City: <%= @application.city %></h3>
 <h3>State: <%= @application.state %></h3>
 <h3>Zip Code: <%= @application.zip_code %></h3>
@@ -41,7 +41,7 @@
       <h2>Submit Application</h2>
       <p> Why I Would Make A Good Owner For These Pets </p>
       <%= f.text_area :why_good_owner %>
-      <%= f.submit %>
+      <%= submit_tag "Submit" %>
     </section>
     <% end %>
 <% end %>
