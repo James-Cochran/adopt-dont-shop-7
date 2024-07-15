@@ -13,8 +13,15 @@ RSpec.describe "the applications show page" do
                                 zip_code: "80220",
                                 description: "I want a dog!",
                                 status: "In Progress")
+    @app2 = Application.create!(name: "Fred",
+                                street_address: "1234 Fred rd",
+                                city: "Boulder",
+                                state: "Colorado",
+                                zip_code: "80221",
+                                description: "I NEED a dog!",
+                                status: "In Progress")
     PetApplication.create!(application: @app1, pet: @pet1)
-    PetApplication.create!(application: @app1, pet: @pet2)  
+    PetApplication.create!(application: @app1, pet: @pet2) 
   end
 
   it "shows the applications show page with all it's attributes" do
@@ -125,5 +132,14 @@ RSpec.describe "the applications show page" do
       expect(page).to have_content("Blue")
     end
     expect(page).to_not have_content("Add a Pet to This Application")
+  end
+
+  # User Story 7
+  it "does not let you submit if there are no pets on the application" do 
+    visit "/applications/#{@app2.id}"
+
+    within("#submit_application") do
+      expect(page).to_not have_content("Submit")
+    end
   end
 end

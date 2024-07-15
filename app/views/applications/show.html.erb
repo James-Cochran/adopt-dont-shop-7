@@ -12,8 +12,8 @@
 <% end %>
 </section>
 
-<% if @application.status == "In Progress" %>
 <section id="add_pets">
+<% if @application.status == "In Progress" %>
   <h1>Add a Pet to This Application </h1>
     <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
       <%= label_tag :search_by_name, "Search for a pet by name" %>
@@ -21,27 +21,26 @@
       <%= hidden_field_tag :application_id, @application.id %>
       <%= submit_tag "Submit" %>
     <% end %>
-  </section>
 <% end %>
+</section>
 
-
-<% if @pets.present? %>
 <section id="search_results">
+<% if @pets.present? %>
   <h2>Matching Pets:</h2>
   <% @pets.each do |pet| %>
     <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
     <p><%= button_to "Adopt This Pet", "/applications/#{@application.id}/adopt_pet", method: :post, params: { pet_id: pet.id } %></p>
   <% end %>
-  </section>
 <% end %>
+</section>
 
-<% if @application.status == "In Progress" && @application.pets.count >= 1 %>
 <section id="submit_application">
+<% if @application.status == "In Progress" && @application.has_pets? %>
     <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>
       <h2>Submit Application</h2>
       <p> Why I Would Make A Good Owner For These Pets </p>
       <%= f.text_area :why_good_owner %>
       <%= submit_tag "Submit" %>
-    </section>
     <% end %>
 <% end %>
+</section>
