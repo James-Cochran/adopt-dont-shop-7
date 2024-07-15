@@ -14,7 +14,8 @@ class ApplicationsController < ApplicationController
       @application.update({"status" => "In Progress"})
       redirect_to "/applications/#{@application.id}"
     else
-      redirect_to "/applications/new"
+      # redirect_to "/applications/new"
+      render :new ({f.text_field :city, value: @application.city})
       flash[:error] = "You must fill in all fields to submit"
     end
   end
