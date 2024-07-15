@@ -110,7 +110,7 @@ RSpec.describe "the applications show page" do
     end
 
     expect(current_path).to eq "/applications/#{@app1.id}"
-
+  
     within("#submit_application") do
       fill_in "why_good_owner", with: "I want a dog!"
       click_button "Submit"
@@ -118,7 +118,12 @@ RSpec.describe "the applications show page" do
 
     expect(current_path).to eq "/applications/#{@app1.id}"
     expect(page).to have_content("Status: Pending")
-    expect(page).to have_content("Blue")
+
+    within("#pets_on_application") do 
+      expect(page).to have_content("Scooby")
+      expect(page).to have_content("Scrappy")
+      expect(page).to have_content("Blue")
+    end
     expect(page).to_not have_content("Add a Pet to This Application")
   end
 end
