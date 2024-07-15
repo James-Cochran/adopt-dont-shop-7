@@ -34,3 +34,15 @@
   <% end %>
   </section>
 <% end %>
+
+<% if @application.status == "In Progress" && @application.pets.count >= 1 %>
+<section id="submit_application">
+        
+    <%= form_with url: "/applications/#{@application.id}", method: :post, local: true do |f| %>
+      <h2>Submit Application</h2>
+      <p> Why I Would Make A Good Owner For These Pets </p>
+      <%= f.text_area :why_good_owner %>
+      <%= f.submit %>
+    </section>
+    <% end %>
+<% end %>
