@@ -6,24 +6,31 @@
 <h3>Description: <%= @application.description %></h3>
 <h3>Status: <%= @application.status %></h3>
 
+<section id="pets_on_application">
 <% @application.pets.each do |pet| %>
   <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
 <% end %>
+</section>
 
 <% if @application.status == "In Progress" %>
+<section id="add_pets">
   <h1>Add a Pet to This Application </h1>
     <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
       <%= label_tag :search_by_name, "Search for a pet by name" %>
       <%= text_field_tag :search_by_name, params[:search_by_name] %>
       <%= hidden_field_tag :application_id, @application.id %>
-      <%= submit_tag "submit" %>
+      <%= submit_tag "Submit" %>
     <% end %>
+  </section>
 <% end %>
 
+
 <% if @pets.present? %>
+<section id="search_results">
   <h2>Matching Pets:</h2>
   <% @pets.each do |pet| %>
     <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
-    <p><%= button_to "Adopt this Pet", "/applications/#{@application.id}/adopt_pet", method: :post, params: { pet_id: pet.id } %></p>
+    <p><%= button_to "Adopt This Pet", "/applications/#{@application.id}/adopt_pet", method: :post, params: { pet_id: pet.id } %></p>
   <% end %>
+  </section>
 <% end %>
