@@ -92,4 +92,33 @@ RSpec.describe "the applications show page" do
       expect(page).to have_content("Blue")
     end
   end
+
+  # User Story 6
+  it "submits an application" do
+    visit "/applications/#{@app1.id}"
+    
+    within("#add_pets") do 
+      fill_in "search_by_name", with: "Blue"
+      click_button "Submit"
+    end
+
+    expect(current_path).to eq "/applications/#{@app1.id}"
+
+    within("#search_results") do
+      expect(page).to have_content("Blue")
+      click_button "Adopt This Pet"
+    end
+
+    expect(current_path).to eq "/applications/#{@app1.id}"
+
+    within("#submit_application") do
+      fill_in "why_good_owner", with: "I want a dog!"
+      click_button "Submit"
+    end
+
+    expect(current_path).to eq "/applications/#{@app1.id}"
+    expect(page).to have_content("Status: Pending")
+    expect(page).to have_content("Blue")
+    expect(page).to_not have_content("Add a Pet to This Application")
+  end
 end
