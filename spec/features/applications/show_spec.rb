@@ -92,4 +92,11 @@ RSpec.describe "the applications show page" do
       expect(page).to have_content("Blue")
     end
   end
+
+  # User Story 6
+  it "submits an application" do
+    visit "/applications/#{@app1.id}"
+    
+    
+  end
 end
