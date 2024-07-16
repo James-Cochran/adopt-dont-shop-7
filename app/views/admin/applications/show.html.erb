@@ -13,8 +13,11 @@
   <% pet.pet_applications.each do |pet_app| %>
     <% if pet_app.status == "Pending" %>
       <%= button_to "Approve This Pet", "/admin/applications/#{@application.id}/pets/#{pet.id}", method: :patch, data: {turbo: false}, params: {status: 'Approved'} %>
+      <%= button_to "Reject This Pet", "/admin/applications/#{@application.id}/pets/#{pet.id}", method: :patch, data: {turbo: false}, params: {status: 'Rejected'} %>
     <% elsif pet_app.status == "Approved" %>
       <%= "Approved!" %>
+    <% elsif pet_app.status == "Rejected" %>
+      <%= "Rejected!" %>
     <% end %>
   </section>
   <% end %>
