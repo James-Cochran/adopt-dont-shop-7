@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "/", to: "application#welcome"
 
   get "/admin/applications/:id", to: "admin/applications#show"
-  patch "/admin/applications/:id", to: "admin/pet_applications#update"
+  patch "/admin/applications/:id/pets/:pet_id", to: "admin/pet_applications#update"
 
 
   get "/shelters", to: "shelters#index"

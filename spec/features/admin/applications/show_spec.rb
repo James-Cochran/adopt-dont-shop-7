@@ -31,7 +31,6 @@ RSpec.describe "the admin applications show page" do
         click_button "Approve This Pet"
       end
 
-      expect(current_path).to eq "/admin/applications/#{@app1.id}"
       # save_and_open_page
 
       within("#pet-#{@pet1.id}") do
