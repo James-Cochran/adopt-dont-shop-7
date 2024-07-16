@@ -1,10 +1,11 @@
 require "rails_helper"
 
+# User Story 10
 RSpec.describe "the admin shelters index page" do
     it "shows all the shelters in desending alphabetical order" do
         shelter1 = Shelter.create!(name: "Mystery Building", city: "Irvine CA", foster_program: false, rank: 9)
         shelter2 = Shelter.create!(name: "Fred and Daphne's Super Shelter", city: "Irvine CA", foster_program: false, rank: 10)
-        @helter3 = Shelter.create!(name: "Velma's Pet Emporium", city: "Irvine CA", foster_program: false, rank: 7)
+        shelter3 = Shelter.create!(name: "Velma's Pet Emporium", city: "Irvine CA", foster_program: false, rank: 7)
 
         visit '/admin/shelters'
 
