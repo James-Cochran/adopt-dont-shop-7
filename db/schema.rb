@@ -32,7 +32,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_172631) do
     t.bigint "application_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "status"
+    t.string "status", default: "Pending"
     t.index ["application_id"], name: "index_pet_applications_on_application_id"
     t.index ["pet_id"], name: "index_pet_applications_on_pet_id"
   end
