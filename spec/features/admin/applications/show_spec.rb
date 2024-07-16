@@ -20,23 +20,33 @@ RSpec.describe "the admin applications show page" do
                                 zip_code: "80221",
                                 description: "I NEED a dog!",
                                 status: "In Progress")
-    PetApplication.create!(application: @app1, pet: @pet1)
-    PetApplication.create!(application: @app1, pet: @pet2) 
+    PetApplication.create!(application: @app1, pet: @pet1, status: "Pending")
+    PetApplication.create!(application: @app1, pet: @pet2, status: "Pending") 
   end
+  
   describe "as a visitor, when I visit the admin application show page" do 
     it "there is a functional button to approve next to every pet on the application" do
       visit "/admin/applications/#{@app1.id}"
-      # save_and_open_page
+
       within("#pet-#{@pet1.id}") do
         click_button "Approve This Pet"
       end
 
-      # save_and_open_page
+      within("#pet-#{@pet2.id}") do
+        expect(page).to have_button("Approve This Pet")
+      end
+
+      expect(current_path).to eq "/admin/applications/#{@app1.id}"
 
       within("#pet-#{@pet1.id}") do
         expect(page).to_not have_content("Approve This Pet")
         expect(page).to have_content("Approved!")
       end
+
+      within("#pet-#{@pet2.id}") do
+        expect(page).to have_button("Approve This Pet")
+      end
     end
   end
 end
+

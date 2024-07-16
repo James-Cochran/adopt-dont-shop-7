@@ -1,13 +1,15 @@
 class Admin::PetApplicationsController < ApplicationController
 
   def update
-    # binding.pry
+    @application = Application.find(params[:id])
     @pet_application = PetApplication.find_by(application_id: params[:id],
                                               pet_id: params[:pet_id])
-    # binding.pry
-    if params["status" => "Approved"].present?
-      @pet_application.status.update("status" => "Approved")
-      redirect_to "/admin/applications/#{@application.id}"
-    end
+    @pet_application.update(pet_app_status_params)
+    redirect_to "/admin/applications/#{@application.id}"
+  end
+
+  private
+  def pet_app_status_params
+    params.permit(:status)
   end
 end
