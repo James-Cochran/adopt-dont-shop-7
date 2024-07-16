@@ -7,19 +7,17 @@
 <h3>Status: <%= @application.status %></h3>
 
 <section id="pets_on_application">
-<% @pets.each do |pet| %>
-  <section id= "pet-<%= pet.id %>">
-  <p><%= link_to "#{pet.name}", "/pets/#{pet.id}" %></p>
-  <% pet.pet_applications.each do |pet_app| %>
+<% @pet_applications.each do |pet_app| %>
+  <section id= "pet-<%= pet_app.pet.id %>">
+  <p><%= link_to "#{pet_app.pet.name}", "/pets/#{pet_app.pet.id}" %></p>
     <% if pet_app.status == "Pending" %>
-      <%= button_to "Approve This Pet", "/admin/applications/#{@application.id}/pets/#{pet.id}", method: :patch, data: {turbo: false}, params: {status: 'Approved'} %>
-      <%= button_to "Reject This Pet", "/admin/applications/#{@application.id}/pets/#{pet.id}", method: :patch, data: {turbo: false}, params: {status: 'Rejected'} %>
+      <%= button_to "Approve This Pet", "/admin/applications/#{pet_app.application.id}/pets/#{pet_app.pet.id}", method: :patch, data: {turbo: false}, params: {status: 'Approved'} %>
+      <%= button_to "Reject This Pet", "/admin/applications/#{pet_app.application.id}/pets/#{pet_app.pet.id}", method: :patch, data: {turbo: false}, params: {status: 'Rejected'} %>
     <% elsif pet_app.status == "Approved" %>
       <%= "Approved!" %>
     <% elsif pet_app.status == "Rejected" %>
       <%= "Rejected!" %>
     <% end %>
   </section>
-  <% end %>
 <% end %>
 </section>
