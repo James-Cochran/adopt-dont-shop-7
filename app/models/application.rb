@@ -6,6 +6,5 @@ class Application < ApplicationRecord
   def has_pets?
     self.pets.count >= 1
   end
-
 end
 

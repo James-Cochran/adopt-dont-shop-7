@@ -24,6 +24,7 @@ RSpec.describe "the applications show page" do
     PetApplication.create!(application: @app1, pet: @pet2) 
   end
 
+  # User Story 1
   it "shows the applications show page with all it's attributes" do
     visit "/applications/#{@app1.id}"
 
@@ -173,10 +174,9 @@ RSpec.describe "the applications show page" do
     expect(current_path).to eq "/applications/#{@app1.id}"
 
     within("#search_results") do
-    expect(page).to have_content("Blue")
-    expect(page).to_not have_content("Scooby")
-    expect(page).to_not have_content("Scrappy")
+      expect(page).to have_content("Blue")
+      expect(page).to_not have_content("Scooby")
+      expect(page).to_not have_content("Scrappy")
+    end
   end
-end
-    
 end
